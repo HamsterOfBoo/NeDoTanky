@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 4936554118752479091}
   m_Layer: 0
   m_Name: EnemyTank
-  m_TagString: Interactable Object
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -301,9 +301,11 @@ MonoBehaviour:
   maxHp: 100
   currentHp: 100
   armour: 0
+  timeBetweenDestroy: 8
   hpBar: {fileID: 1040102528989907461}
   _towerBehaviour: {fileID: 8532786143819197780}
   isDied: 0
+  gayManager: {fileID: 0}
 --- !u!1 &8532786144820969205
 GameObject:
   m_ObjectHideFlags: 0

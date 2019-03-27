@@ -9,6 +9,9 @@ public class EnemyTowerBehaviour : Tower
     
     public override float lookspeed { get; set; }
     public override float lookAngle { get; set; }
+
+    public bool stopLooking = false;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -28,9 +31,12 @@ public class EnemyTowerBehaviour : Tower
 
     public override void LookOnEnemy()
     {
+        if (!stopLooking)
+        {
             Vector3 agroTarget = enemy.agroColliders[0].GetComponent<Tank>().transform.position;
             Quaternion targetRotation = Quaternion.LookRotation(agroTarget - transform.position);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, lookspeed * Time.deltaTime);
             lookAngle = Quaternion.Angle(transform.rotation, targetRotation);
+        }
     }
 }

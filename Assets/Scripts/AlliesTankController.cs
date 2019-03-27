@@ -43,8 +43,9 @@ public class AlliesTankController : TankController
         while (true)
         {
             navAgent.isStopped = true;
-            if (oldPos.magnitude - transform.position.magnitude == 0f && towerController.lookAngle<2f)
+            if (towerController.lookAngle<2f)
             {
+                if(oldPos.magnitude - transform.position.magnitude != 0f ) yield return new WaitForSeconds(1f);
                 oldPos = transform.position;
                 projSpawner.Spawn();
                 navAgent.isStopped = false;

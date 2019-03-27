@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class EnemyTankController : TankController
 {
     public LayerMask agroMask;
+    public int agroRange = 15;
 
     public Collider[] agroColliders;
     private bool IsAttacking = false;
@@ -23,7 +24,7 @@ public class EnemyTankController : TankController
     void FixedUpdate()
     {
 
-        agroColliders =  Physics.OverlapSphere(transform.position, 15, agroMask);
+        agroColliders =  Physics.OverlapSphere(transform.position, agroRange, agroMask);
         if (agroColliders.Length > 0)
         {
             if (Time.time > projSpawner.cooldown)

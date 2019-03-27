@@ -17,6 +17,7 @@ public class Tank : MonoBehaviour
     public bool isDied = false;
     private TankController _tankController;
     private NavMeshAgent navAgent;
+    public GameManager gayManager;
     
 
 
@@ -26,6 +27,12 @@ public class Tank : MonoBehaviour
         hpBar.value = currentHp;
         _towerBehaviour = GetComponentInChildren<Tower>();
         _tankController = GetComponentInChildren<TankController>();
+
+        GameObject GayControllerObject = GameObject.FindWithTag("GameController");
+        if (GayControllerObject != null)
+        {
+            gayManager = GayControllerObject.GetComponent<GameManager>();
+        }
     }
 
     private void FixedUpdate()
@@ -61,10 +68,15 @@ public class Tank : MonoBehaviour
         
         if (gameObject.tag == "Player")
         {
+            gayManager.GameOver();
             GetComponent<BoxCollider>().enabled = false;
         }
         else
+        {
             GetComponentInChildren<Canvas>().enabled = false;
+            gayManager.AddScore();
+            (_towerBehaviour as EnemyTowerBehaviour).stopLooking = true;
+        }
     }
 
     private IEnumerator DrownTank()
